@@ -1,13 +1,20 @@
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import 'zone.js';
+import { Component } from '@angular/core';
+import { bootstrapApplication } from '@angular/platform-browser';
 
-import { AppModule } from './app/app.module';
+// describle component
+@Component({
+  selector: 'add-one-button', // component name used in markup
+  standalone: true, // component is self-contained
+  template: `
+   <button (click)="count = count + 1"> Add one</button> {{ count }}
+   <button (click)="count = 0">Rest</button>
+  `, //the component's markup
+})
 
-platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => console.error(err));
+// export component
+export class AddOneButtonComponent {
+  count = 0;
+}
 
-
-/*
-Copyright Google LLC. All Rights Reserved.
-Use of this source code is governed by an MIT-style license that
-can be found in the LICENSE file at https://angular.io/license
-*/
+bootstrapApplication(AddOneButtonComponent);
